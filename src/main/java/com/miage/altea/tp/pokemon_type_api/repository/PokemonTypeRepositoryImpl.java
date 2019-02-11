@@ -2,6 +2,7 @@ package com.miage.altea.tp.pokemon_type_api.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.miage.altea.tp.pokemon_type_api.bo.PokemonType;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ public class PokemonTypeRepositoryImpl implements PokemonTypeRepository {
 
     public PokemonTypeRepositoryImpl() {
         try {
-            var pokemonsStream = this.getClass().getResourceAsStream("/pokemons.json");
+            var pokemonsStream = new ClassPathResource("pokemons.json").getInputStream();
 
             var objectMapper = new ObjectMapper();
             var pokemonsArray = objectMapper.readValue(pokemonsStream, PokemonType[].class);
@@ -57,4 +58,30 @@ public class PokemonTypeRepositoryImpl implements PokemonTypeRepository {
     public List<PokemonType> findAllPokemonType() {
         return pokemons;
     }
+
+    @Override
+    public List<PokemonType> findAllPokemonByTypes(List<String> types) {
+        List<PokemonType> result = new ArrayList<>();
+
+        if(types == null || types.isEmpty()){
+            return null;
+        }
+
+        for(PokemonType pokemonType: pokemons){
+            boolean contains=true;
+            for(String type : types){
+                if(pokemonType.getTypes()==null || ! pokemonType.getTypes().contains(type)){
+                    contains = false;
+                }
+            }
+
+            if(contains){
+                result.add(pokemonType);
+            }
+        }
+
+        return result;
+    }
+
+
 }

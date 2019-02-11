@@ -7,10 +7,7 @@ import com.miage.altea.tp.pokemon_type_api.service.PokemonTypeService;
 import com.miage.altea.tp.pokemon_type_api.service.PokemonTypeServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +25,16 @@ public class PokemonTypeController {
     @GetMapping("/{id}")
     PokemonType getPokemonTypeFromId(@PathVariable int id){
         return service.getPokemonType(id);
+    }
+
+    @GetMapping(value = "/", params = {"name"})
+    PokemonType getPokemonTypeFromName(@RequestParam("name") String name){
+        return service.getPokemonTypeByName(name);
+    }
+
+    @GetMapping(value = "/", params = {"types"})
+    List<PokemonType> getPokemonTypeFromName(@RequestParam("types") List<String> types){
+        return service.getPokemonTypeBTypes(types);
     }
 
     @GetMapping("/")
