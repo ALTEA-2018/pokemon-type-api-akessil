@@ -1,15 +1,13 @@
 package com.miage.altea.tp.pokemon_type_api.controller;
 
 import com.miage.altea.tp.pokemon_type_api.bo.PokemonType;
-import com.miage.altea.tp.pokemon_type_api.repository.PokemonTypeRepository;
-import com.miage.altea.tp.pokemon_type_api.repository.PokemonTypeRepositoryImpl;
 import com.miage.altea.tp.pokemon_type_api.service.PokemonTypeService;
-import com.miage.altea.tp.pokemon_type_api.service.PokemonTypeServiceImpl;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 @RequestMapping("/pokemon-types")
