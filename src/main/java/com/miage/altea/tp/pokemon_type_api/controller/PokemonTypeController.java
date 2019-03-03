@@ -2,12 +2,10 @@ package com.miage.altea.tp.pokemon_type_api.controller;
 
 import com.miage.altea.tp.pokemon_type_api.bo.PokemonType;
 import com.miage.altea.tp.pokemon_type_api.service.PokemonTypeService;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Locale;
 
 @Controller
 @RequestMapping("/pokemon-types")
@@ -35,7 +33,7 @@ public class PokemonTypeController {
         return service.getPokemonTypeBTypes(types);
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public List<PokemonType> getAllPokemonTypes() {
         return service.getAllPokemonTypes();
     }
