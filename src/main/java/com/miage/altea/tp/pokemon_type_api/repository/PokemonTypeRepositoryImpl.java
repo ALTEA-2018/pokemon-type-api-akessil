@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 @Component
@@ -15,12 +16,23 @@ public class PokemonTypeRepositoryImpl implements PokemonTypeRepository {
 
     private List<PokemonType> pokemons = new ArrayList<>();
 
+    class SortbyId implements Comparator<PokemonType>
+    {
+        // Used for sorting in ascending order of
+        // roll number
+        public int compare(PokemonType p1, PokemonType p2)
+        {
+            return p1.getId() - p2.getId();
+        }
+    }
+
     public PokemonTypeRepositoryImpl() {
         try {
             var pokemonsStream = new ClassPathResource("pokemons.json").getInputStream();
 
             var objectMapper = new ObjectMapper();
             var pokemonsArray = objectMapper.readValue(pokemonsStream, PokemonType[].class);
+            Arrays.sort(pokemonsArray, new SortbyId());
             this.pokemons = Arrays.asList(pokemonsArray);
         } catch (IOException e) {
             e.printStackTrace();
