@@ -51,7 +51,6 @@ public class TranslationRepositoryImpl implements TranslationRepository {
 
         for(Translation t : localeTranslations) {
             if(id == t.getId()) {
-                System.out.println("pokemon name Found for id = " + id + " , locale = " + locale + ", name=" + t.getName());
                 return t.getName();
             }
         }

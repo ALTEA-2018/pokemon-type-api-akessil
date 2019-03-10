@@ -18,8 +18,6 @@ public class PokemonTypeRepositoryImpl implements PokemonTypeRepository {
 
     class SortbyId implements Comparator<PokemonType>
     {
-        // Used for sorting in ascending order of
-        // roll number
         public int compare(PokemonType p1, PokemonType p2)
         {
             return p1.getId() - p2.getId();
@@ -41,8 +39,6 @@ public class PokemonTypeRepositoryImpl implements PokemonTypeRepository {
 
     @Override
     public PokemonType findPokemonTypeById(int id) {
-        System.out.println("Loading Pokemon information for Pokemon id " + id);
-
         for(PokemonType pokemonType: pokemons){
             if(id == pokemonType.getId()){
                 return pokemonType;
@@ -53,7 +49,6 @@ public class PokemonTypeRepositoryImpl implements PokemonTypeRepository {
 
     @Override
     public PokemonType findPokemonTypeByName(String name) {
-        System.out.println("Loading Pokemon information for Pokemon name " + name);
         if(name == null){
             return null;
         }
